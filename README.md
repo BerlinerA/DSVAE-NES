@@ -16,7 +16,7 @@ Specifically, the repository contains code to:
 the official implementation of [Gradient Estimation with
 Stochastic Softmax Tricks](https://github.com/choidami/sst).
 
-### Requirements
+## Requirements
 * python 3.7
 * pytorch 1.8
 * torchvision
@@ -26,7 +26,7 @@ Stochastic Softmax Tricks](https://github.com/choidami/sst).
 * [ad3](https://github.com/andre-martins/ad3)
 * [sparsemap](https://github.com/vene/sparsemap)
 
-### Unstructured discrete VAE
+## Unstructured discrete VAE
 Optimize the unstructured VAE on one of the four supported benchmarks.
 
 <u>For optimization using <b>NES</b>, run:</u>
@@ -39,9 +39,9 @@ python train.py --dataset [MNIST, FashionMNIST, KMNIST or Omniglot] --binarize -
 python train.py --dataset [MNIST, FashionMNIST, KMNIST or Omniglot] --binarize --validate --sst
 ```
 
-### Dependency parsing
+## Dependency parsing
 
-#### Data 
+### Data 
 The experiments were performed on datasets from the [Universal Dependencies](https://universaldependencies.org/).
 The datasets should be organized as follows:
 ```bash
@@ -56,7 +56,7 @@ datasets_dir
       └── test.conllu
 ```
 
-#### Running experiments
+### Running experiments
 In order to run unsupervised domain adaptation experiments,
 begin with training the model on the source domain in a supervised manner by running:
 ```
@@ -88,7 +88,7 @@ python train.py --source [source domain name] --target [target domain name] --ex
 
 For all methods, tune the `--target_lr` parameter over the [5e-4, 1e-5] interval.
 
-### Cite
+## Cite
 If you make use of this code for your research, we'll appreciate citing our paper:
 ```
 @inproceedings{berliner2021learning,
