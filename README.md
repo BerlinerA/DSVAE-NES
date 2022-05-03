@@ -16,13 +16,14 @@ Specifically, the repository contains code to:
 the official implementation of [Gradient Estimation with
 Stochastic Softmax Tricks](https://github.com/choidami/sst).
 
-## Requirements
-* python 3.7
-* pytorch 1.8
-* torchvision
-* nltk
-* ray
-* cython
+## Installation
+First, install Python 3.7. \
+Then, clone this repository and install the dependencies (preferably using a conda environment):
+```
+git clone https://github.com/BerlinerA/DSVAE-NES
+pip install -r requirements.txt
+```
+For running the dependency parsing experiments, you should also manually install the following packages:
 * [ad3](https://github.com/andre-martins/ad3)
 * [sparsemap](https://github.com/vene/sparsemap)
 
