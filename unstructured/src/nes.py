@@ -7,7 +7,7 @@ import numpy as np
 import torch.nn.functional as F
 from scipy.stats import zscore
 
-from unstructured.src.utils import kl_discrete
+from utils import kl_discrete
 
 FORWARD_NUM_GPUS = 0.15
 HIGHEST_RANDINT_VAL = 10000000

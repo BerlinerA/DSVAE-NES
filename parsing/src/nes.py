@@ -6,10 +6,10 @@ from torch.utils.data.dataloader import DataLoader
 from torch.distributions.gumbel import Gumbel
 from scipy.stats import zscore
 
-from parsing.solvers.decoder_eisner import parse_proj
-from parsing.solvers.chu_liu_edmonds import decode_mst
-from parsing.src.utils import normalize, to_adj_matrix
-from parsing.src.constants import *
+from solvers.decoder_eisner import parse_proj
+from solvers.chu_liu_edmonds import decode_mst
+from utils import normalize, to_adj_matrix
+from constants import *
 
 
 @ray.remote(num_gpus=FORWARD_NUM_GPUS)

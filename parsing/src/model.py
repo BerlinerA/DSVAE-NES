@@ -6,7 +6,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.distributions.bernoulli import Bernoulli
 
-from parsing.src.utils import normalize
+from utils import normalize
 
 
 class DependencyParser(nn.Module):

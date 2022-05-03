@@ -2,7 +2,7 @@ import numpy as np
 from torch.utils.data.dataset import Dataset
 from nltk.parse import DependencyGraph
 
-from parsing.src.constants import *
+from constants import *
 
 
 class DependencyDataSet(Dataset):

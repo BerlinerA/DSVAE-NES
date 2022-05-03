@@ -11,15 +11,17 @@ from torch.utils.data.dataloader import DataLoader
 from torch.distributions.gumbel import Gumbel
 from nltk.parse import DependencyEvaluator
 
-from parsing.src.utils import *
-from parsing.src.data import *
-from parsing.src.model import DependencyParser, Decoder
-from parsing.solvers.eisner_surrogate import eisner_surrogate
-from parsing.solvers.chu_liu_edmonds import decode_mst
-from parsing.solvers.decoder_eisner import parse_proj
-from parsing.solvers.sparsemap import tree_layer
-from parsing.src.optim import AdamOptim
-from parsing.src.nes import train_using_nes
+from utils import *
+from data import *
+from model import DependencyParser, Decoder
+from solvers.eisner_surrogate import eisner_surrogate
+from solvers.chu_liu_edmonds import decode_mst
+from solvers.decoder_eisner import parse_proj
+from solvers.sparsemap import tree_layer
+from optim import AdamOptim
+from nes import train_using_nes
+
+os.environ['RAY_DISABLE_IMPORT_WARNING'] = '1'
 
 
 def main():

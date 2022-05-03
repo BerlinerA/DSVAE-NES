@@ -1,6 +1,6 @@
 import torch
 
-from parsing.src.constants import *
+from constants import *
 
 
 class AdamOptim:

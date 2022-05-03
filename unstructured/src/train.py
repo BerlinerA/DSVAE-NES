@@ -9,11 +9,13 @@ import numpy as np
 import torch.optim as optim
 from torchvision import transforms
 
-from unstructured.src.data import dataset_creation, get_data_loaders
-from unstructured.src.model import VAE
-from unstructured.src.utils import *
-from unstructured.src.nes import train_using_nes
-from unstructured.src.optim import Adam
+from data import dataset_creation, get_data_loaders
+from model import VAE
+from utils import *
+from nes import train_using_nes
+from optim import Adam
+
+os.environ['RAY_DISABLE_IMPORT_WARNING'] = '1'
 
 
 def main():

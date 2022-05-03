@@ -9,7 +9,7 @@ import torch
 import numpy as np
 from nltk.parse import DependencyGraph
 
-from parsing.src.constants import *
+from constants import *
 
 numberRegex = re.compile("[0-9]+|[0-9]+\\.[0-9]+|[0-9]+[0-9,]+")
 
