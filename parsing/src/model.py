@@ -43,7 +43,7 @@ class DependencyParser(nn.Module):
         self.hid_arc_h = nn.Linear(2 * lstm_hid_dim, mlp_hid_dim, bias=False)
         self.hid_arc_m = nn.Linear(2 * lstm_hid_dim, mlp_hid_dim, bias=False)
         self.hid_arc_bias = nn.Parameter(torch.empty((1, mlp_hid_dim)))
-        DependencyParser.param_init(self.hid_arc_bias)
+        DependencyParser._param_init(self.hid_arc_bias)
 
         self.slp_out_arc = SLP(hidden_size=mlp_hid_dim)
 
@@ -51,7 +51,7 @@ class DependencyParser(nn.Module):
         self.hid_rel_h = nn.Linear(2 * lstm_hid_dim, mlp_hid_dim, bias=False)
         self.hid_rel_m = nn.Linear(2 * lstm_hid_dim, mlp_hid_dim, bias=False)
         self.hid_rel_bias = nn.Parameter(torch.empty((1, mlp_hid_dim)))
-        DependencyParser.param_init(self.hid_rel_bias)
+        DependencyParser._param_init(self.hid_rel_bias)
 
         self.slp_out_rel = SLP(hidden_size=mlp_hid_dim,
                                n_relations=n_arc_relations,
@@ -62,7 +62,7 @@ class DependencyParser(nn.Module):
             if name == 'ex_word_emb':
                 continue
             else:
-                DependencyParser.modules_init(module)
+                DependencyParser._modules_init(module)
 
     def forward(self, sentence, word_dropout=False):
 
@@ -120,7 +120,7 @@ class DependencyParser(nn.Module):
         return arc_scores, rel_scores
 
     @staticmethod
-    def modules_init(m):
+    def _modules_init(m):
         if isinstance(m, nn.Embedding):
             emb_bound = math.sqrt(3. / m.embedding_dim)
             nn.init.uniform_(m.weight, -emb_bound, emb_bound)
@@ -138,10 +138,10 @@ class DependencyParser(nn.Module):
         elif isinstance(m, SLP):
             nn.init.xavier_uniform_(m.fc.weight)
             if m.fc.bias is not None:
-                DependencyParser.param_init(m.fc.bias)
+                DependencyParser._param_init(m.fc.bias)
 
     @staticmethod
-    def param_init(p):
+    def _param_init(p):
         bound = math.sqrt(3. / p.shape[-1])
         nn.init.uniform_(p, -bound, bound)
 
@@ -187,7 +187,7 @@ class Decoder(nn.Module):
 
         # initialize model weights
         for name, module in self.named_children():
-            Decoder.modules_init(module)
+            Decoder._modules_init(module)
 
     def forward(self, sentence, dep_tree):
 
@@ -199,7 +199,7 @@ class Decoder(nn.Module):
         head_scores = torch.empty(size=(s_length, self.out_dim)).to(self.device)
         mod_scores = torch.empty(size=(s_length, self.out_dim)).to(self.device)
 
-        h_i, c_i = self.init_hidden()
+        h_i, c_i = self._init_hidden()
         w_i = self.embedding(torch.tensor([self.ex_emb_w2i[sentence[0][0]]], dtype=torch.long).to(self.device)).unsqueeze(0)
         rec_loss = 0.
         for i in range(s_length):
@@ -225,7 +225,7 @@ class Decoder(nn.Module):
         return rec_loss / s_length
 
     @staticmethod
-    def modules_init(m):
+    def _modules_init(m):
         if isinstance(m, nn.LSTM):
             for name, p in m.named_parameters():
                 if 'bias' in name:
@@ -238,14 +238,14 @@ class Decoder(nn.Module):
         elif isinstance(m, nn.Linear):
             nn.init.xavier_uniform_(m.weight)
             if m.bias is not None:
-                Decoder.param_init(m.bias)
+                Decoder._param_init(m.bias)
 
     @staticmethod
-    def param_init(p):
+    def _param_init(p):
         bound = math.sqrt(3. / p.shape[-1])
         nn.init.uniform_(p, -bound, bound)
 
-    def init_hidden(self):
+    def _init_hidden(self):
         weight = next(self.parameters())
         return (weight.new_zeros(1, 1, self.hid_dim),
                 weight.new_zeros(1, 1, self.hid_dim))

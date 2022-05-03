@@ -23,12 +23,12 @@ class VAE(torch.nn.Module):
         self.dec_fc1 = nn.Linear(latent_dim, hidden_dim)
         self.dec_fc2 = nn.Linear(hidden_dim, input_size)
 
-    def encode(self, x):
+    def _encode(self, x):
         x = self.enc_fc1(x)
         x = F.relu(x)
         return self.enc_fc2(x)
 
-    def decode(self, z):
+    def _decode(self, z):
         x = self.dec_fc1(z)
         x = F.relu(x)
         x = self.dec_fc2(x)
@@ -38,7 +38,7 @@ class VAE(torch.nn.Module):
 
     def forward(self, x, tau=1.):
         x = torch.flatten(x, start_dim=1)
-        logits = self.encode(x).view(x.size(0), -1, self.latent_dim)
+        logits = self._encode(x).view(x.size(0), -1, self.latent_dim)
         gumbels = Gumbel(loc=0, scale=1).sample(logits.shape).to(logits.device)
         if not self.training or self.nes:
             top1_indices = torch.argmax(logits if not self.training else logits + gumbels, dim=-1, keepdim=True)
@@ -48,4 +48,4 @@ class VAE(torch.nn.Module):
 
         z = z.view(x.size(0), -1)
 
-        return [self.decode(z), logits]
+        return [self._decode(z), logits]
