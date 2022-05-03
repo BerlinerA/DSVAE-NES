@@ -3,7 +3,7 @@ import numpy as np
 from torch.autograd import Function, gradcheck
 from scipy.special import softmax
 
-from decoder_eisner import parse_proj
+from solvers.decoder_eisner import parse_proj
 
 
 def eisner_surrogate(arc_scores, hard=False):
