@@ -21,11 +21,17 @@ First, install Python 3.7. \
 Then, clone this repository and install the dependencies (preferably using a conda environment):
 ```
 git clone https://github.com/BerlinerA/DSVAE-NES
+cd DSVAE-NES
 pip install -r requirements.txt
 ```
 For running the dependency parsing experiments, you should also manually install the following packages:
 * [ad3](https://github.com/andre-martins/ad3)
 * [sparsemap](https://github.com/vene/sparsemap)
+
+Before running the code, configure the GPUs that NES will run on using the <b>CUDA_VISIBLE_DEVICES</b> environment variable:
+```
+export CUDA_VISIBLE_DEVICES=0,1,2
+```
 
 ## Unstructured discrete VAE
 Optimize the unstructured VAE on one of the four supported benchmarks.
